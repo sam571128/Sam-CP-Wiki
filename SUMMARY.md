@@ -6,6 +6,7 @@
 ## 動態規劃
 
 * [什麼是動態規劃？](dong-tai-gui-hua/what-is-dynamic-programming.md)
+* [經典題統整](dong-tai-gui-hua/jing-dian-ti-tong-zheng.md)
 
 ## 資料結構 <a id="data-structure"></a>
 
