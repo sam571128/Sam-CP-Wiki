@@ -1,2 +1,14 @@
-# Sam-CP-Wiki
-The wiki of competitive programming written by sam571128
+---
+description: 這裡會放置一些山姆寫的競程相關的筆記
+---
+
+# 首頁
+
+本站為山姆的競程維基
+
+我大概會在這放一些競程相關東西的教學吧
+
+想看山姆的比賽心得等等請至：[山姆的競程日記](https://sam571128.codes/)
+
+然後請提醒山姆記得更新本站
+
