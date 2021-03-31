@@ -400,10 +400,121 @@ $$
 
 這四種操作能完美的解決這個問題！
 
+以下為實作程式碼
+
 {% tabs %}
 {% tab title="C++" %}
 ```cpp
+struct node{
+    ll ans, left, right, sum;
+    node(){}
+    node(ll a, ll b, ll c, ll d){
+        ans = a, left = b, right = c, sum = d;
+    }
+};
 
+node combine(node a, node b){
+    node c;
+    c.ans = max({a.ans, b.ans, a.right+b.left});
+    c.left = max(a.sum+b.left, a.left);
+    c.right = max(a.right+b.sum, b.right);
+    c.sum = a.sum + b.sum;
+    return c;
+}
+```
+{% endtab %}
+{% endtabs %}
+
+{% tabs %}
+{% tab title="Codeforces Edu Segment Tree Part 1 Step 2" %}
+[點我前往題目](https://codeforces.com/edu/course/2/lesson/4/2/practice/contest/273278/problem/A)
+
+A: 即範例題，在每次修改後輸出整個陣列的答案
+{% endtab %}
+
+{% tab title="參考程式碼" %}
+```cpp
+#include <bits/stdc++.h>
+
+#define ll long long
+#define fastio ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+
+using namespace std;
+
+struct node{
+    ll ans, left, right, sum;
+    node(){}
+    node(ll a, ll b, ll c, ll d){
+        ans = a, left = b, right = c, sum = d;
+    }
+};
+
+const int MAXN = 1e5+5;
+node tr[MAXN*4];
+int arr[MAXN]; 
+
+node combine(node a, node b){
+    node c;
+    c.ans = max({a.ans, b.ans, a.right+b.left});
+    c.left = max(a.sum+b.left, a.left);
+    c.right = max(a.right+b.sum, b.right);
+    c.sum = a.sum + b.sum;
+    return c;
+}
+
+void build(int idx, int l, int r){
+    if(l==r){
+        tr[idx] = node(arr[l],arr[l],arr[l],arr[l]); 
+    }else{
+        int m = (l+r)/2;
+        build(idx*2,l,m); 
+        build(idx*2+1,m+1,r); 
+        tr[idx] = combine(tr[idx*2],tr[idx*2+1]); 
+    }
+}
+
+void update(int pos, int val, int idx, int l, int r){
+    if(l==r){
+        tr[idx] = node(val,val,val,val); 
+        return;
+    }
+    int m = (l+r)/2;
+    if(pos <= m) update(pos, val, idx*2, l, m);
+    else update(pos, val, idx*2+1, m+1, r);
+    tr[idx] = combine(tr[idx*2],tr[idx*2+1]); 
+}
+
+node query(int ql, int qr, int idx, int l, int r){
+    if(ql <= l && r <= qr){
+        return tr[idx];
+    }
+    int m = (l+r)/2;
+    if(ql > m){
+        return query(ql, qr, idx*2+1, m+1, r);
+    }
+    if(qr <= m){
+        return query(ql, qr, idx*2, l, m);
+    }
+    return combine(query(ql, qr, idx*2, l, m), query(ql, qr, idx*2+1, m+1, r));
+}
+
+signed main(){
+    fastio
+    int n, m;
+    cin >> n >> m;
+    for(int i = 0; i < n; i++){
+        cin >> arr[i];
+    }
+    build(1, 0, n-1);
+
+    cout << (tr[1].ans < 0 ? 0 : tr[1].ans) << "\n";
+    for(int i = 0;i < m;i++){
+        int p, v;
+        cin >> p >> v;
+        update(p, v, 1, 0, n-1);
+        cout << (tr[1].ans < 0 ? 0 : tr[1].ans) << "\n";
+    }
+}
 ```
 {% endtab %}
 {% endtabs %}
