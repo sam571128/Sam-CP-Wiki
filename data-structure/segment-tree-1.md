@@ -117,7 +117,7 @@ void update(int pos, int val, int idx, int l, int r){
 
 {% tabs %}
 {% tab title="CF Edu Segment Tree Part 1 Step 1" %}
-[點我前往題目](https://codeforces.ml/edu/course/2/lesson/4/1/practice)
+[點我前往題目](https://codeforces.com/edu/course/2/lesson/4/1/practice)
 
 第一、二題：區間求（和/最小值）線段樹
 
