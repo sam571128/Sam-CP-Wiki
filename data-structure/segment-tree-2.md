@@ -8,6 +8,8 @@ description: 如果你認為他只能做到單點修改，區間詢問，那麼�
 
 {% page-ref page="segment-tree-1.md" %}
 
+### 線段樹上二分搜
+
 而現在呢？如果我們有一道問題如下
 
 > 在一個陣列中尋找第一個出現的大於 $$x$$ 的位置，同時也會有修改元素的操作
@@ -320,4 +322,55 @@ signed main(){
 ```
 {% endtab %}
 {% endtabs %}
+
+### 線段樹維護動態規劃（Dynamic Programming）
+
+有些動態規劃的題目，我們可以將轉移式放到線段樹上，來幫助我們尋找答案
+
+而這裡，我們以「區間最大連續和」為例
+
+問題如下：
+
+> 給一個 $$n$$ 項的陣列，以及 $$q$$ 個操作或詢問
+>
+> 每次操作修改一個位置的值
+>
+> 每次詢問區間$$[l,r]$$ 之間的區間最大連續和
+
+這個問題，你可能會很直覺的想到動態規劃中所學到的 $$O(n)$$ 解法
+
+但是，今天我們有$$q$$次詢問，每次詢問都跑 $$O(n)$$ ，那總時間會高達 $$O(qn)$$！
+
+不過，這樣的問題我們可以使用線段樹來輔助達成多次詢問
+
+我們在[前一章節](segment-tree-1.md)所學的線段樹，大多都是維護總和/最大值等等
+
+而如果我們將其改成維護區間最大連續和呢？
+
+{% tabs %}
+{% tab title="C++" %}
+```cpp
+int query(int ql, int qr, int idx, int l, int r){
+    if(ql <= l && r <= qr){
+        return tr[idx];
+    }
+    int m = (l+r)/2;
+    if(ql > m){
+        return query(ql, qr, idx*2+1, m+1, r);
+    }
+    if(qr <= m){
+        return query(ql, qr, idx*2, l, m);
+    }
+    //修改合併函數！
+    return combine(query(ql, qr, idx*2, l, m), query(ql, qr, idx*2+1, m+1, r));
+}
+```
+{% endtab %}
+{% endtabs %}
+
+首先，我們該如何維護一個節點的答案呢？
+
+以下用 $$A$$ 表示答案、$$S$$ 表示總和、 $$L$$
+
+
 
