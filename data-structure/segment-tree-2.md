@@ -45,12 +45,32 @@ int find(int x, int idx, int l, int r){
 學會怎麼做之後，當然就是要來做練習題囉
 
 {% tabs %}
-{% tab title="First Tab" %}
+{% tab title="Codeforces Edu Segment Tree Part 1 Step 2" %}
+[點我前往題目](https://codeforces.com/edu/course/2/lesson/4/3/practice)
 
+B:  詢問為 $$0/1$$ 陣列中第 $$k$$ 個 $$1$$
+
+C:  詢問第一個大於 $$x$$ 的元素的出現位置
+
+D: 同上，但是詢問增加了位置需要在 $$l$$ 右邊的條件
 {% endtab %}
 
-{% tab title="Second Tab" %}
+{% tab title="參考程式碼 \(B\)" %}
+```text
 
+```
+{% endtab %}
+
+{% tab title="參考程式碼 \(C\)" %}
+```
+
+```
+{% endtab %}
+
+{% tab title="參考程式碼 \(D\)" %}
+```
+
+```
 {% endtab %}
 {% endtabs %}
 
