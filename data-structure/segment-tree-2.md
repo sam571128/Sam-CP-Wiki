@@ -42,3 +42,15 @@ int find(int x, int idx, int l, int r){
 {% endtab %}
 {% endtabs %}
 
+學會怎麼做之後，當然就是要來做練習題囉
+
+{% tabs %}
+{% tab title="First Tab" %}
+
+{% endtab %}
+
+{% tab title="Second Tab" %}
+
+{% endtab %}
+{% endtabs %}
+
