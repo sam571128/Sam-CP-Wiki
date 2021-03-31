@@ -48,7 +48,7 @@ int find(int x, int idx, int l, int r){
 
 {% tabs %}
 {% tab title="Codeforces Edu Segment Tree Part 1 Step 2" %}
-[點我前往題目](https://codeforces.com/edu/course/2/lesson/4/3/practice)
+[點我前往題目](https://codeforces.com/edu/course/2/lesson/4/2/practice)
 
 B:  詢問為 $$0/1$$ 陣列中第 $$k$$ 個 $$1$$
 
