@@ -148,8 +148,95 @@ signed main(){
 {% endtab %}
 
 {% tab title="參考程式碼 \(D\)" %}
-```
+```cpp
+#include <bits/stdc++.h>
 
+#define ll long long
+#define fastio ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+
+using namespace std;
+
+const int MAXN = 1e5+5;
+ll tr[MAXN*4], arr[MAXN]; 
+
+ll combine(ll a, ll b){
+    return max(a,b);
+}
+
+void build(int idx, int l, int r){
+    if(l==r){
+        tr[idx] = arr[l]; 
+    }else{
+        int m = (l+r)/2;
+        build(idx*2,l,m); 
+        build(idx*2+1,m+1,r); 
+        tr[idx] = combine(tr[idx*2],tr[idx*2+1]); 
+    }
+}
+
+void update(int pos, int val, int idx, int l, int r){
+    if(l==r){
+        tr[idx] = val;
+        return;
+    }
+    int m = (l+r)/2;
+    if(pos <= m) update(pos, val, idx*2, l, m);
+    else update(pos, val, idx*2+1, m+1, r);
+    tr[idx] = combine(tr[idx*2],tr[idx*2+1]); 
+}
+
+ll query(int ql, int qr, int idx, int l, int r){
+    if(ql <= l && r <= qr){
+        return tr[idx];
+    }
+    int m = (l+r)/2;
+    if(ql > m){
+        return query(ql, qr, idx*2+1, m+1, r);
+    }
+    if(qr <= m){
+        return query(ql, qr, idx*2, l, m);
+    }
+    return combine(query(ql, qr, idx*2, l, m), query(ql, qr, idx*2+1, m+1, r));
+}
+
+int pos = 1e9;
+
+void find(int ql, int x, int idx, int l, int r){
+    if(tr[idx] < x) return;
+    if(l==r){
+        pos = l;
+        return;
+    }
+    int m = (l+r)/2;
+    
+    if(tr[idx*2] >= x && m >= ql) find(ql, x, idx*2, l, m); 
+    if(pos==1e9) find(ql, x, idx*2+1, m+1, r);
+}
+
+signed main(){
+    fastio
+    int n, m;
+    cin >> n >> m;
+    for(int i = 0; i < n; i++){
+        cin >> arr[i];
+    }
+    build(1, 0, n-1);
+    for(int i = 0;i < m;i++){
+        int op;
+        cin >> op;
+        if(op==1){
+            int i, v;
+            cin >> i >> v;
+            update(i, v, 1, 0, n-1);
+        }else{
+            int x, l;
+            cin >> x >> l;
+            pos = 1e9;
+            find(l, x, 1, 0, n-1);
+            cout << (pos == 1e9 ? -1 : pos) << "\n";
+        }
+    }
+}
 ```
 {% endtab %}
 {% endtabs %}
