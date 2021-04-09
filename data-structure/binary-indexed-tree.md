@@ -22,6 +22,8 @@ BIT \(Binary Index Tree\) 是一個在1994年，由 **Peter M. Fenwick** 所提�
 
 ### 程式上要怎麼去找到數字的lowbit呢？
 
+找lowbit的的結論很簡單，就是短短一行 $$x&(-x)$$ 
+
 
 
 ### BIT的運作原理
