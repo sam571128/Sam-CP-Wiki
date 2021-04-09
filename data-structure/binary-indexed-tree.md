@@ -122,7 +122,7 @@ void update(int i, int val){
 int ans = 0;
 for(int i = 0; i < n; i++){
     //在答案增加在這個元素前有幾個更大的數字
-    ans += query(N)-query(arr[i]); 
+    ans += query(MAXN-1)-query(arr[i]); 
     //更新樹上的資料
     update(arr[i]);
 }
@@ -218,5 +218,127 @@ int find(int k){
 
 ### 練習題
 
-（待補）
+#### 單點修改、區間詢問
+
+{% tabs %}
+{% tab title=" CF Edu Segment Tree Part 1 Step 1" %}
+[點我前往題目](https://codeforces.com/edu/course/2/lesson/4/1/practice/contest/273169/problem/A)
+
+第一、二題：區間求和線段樹
+
+> 給一個 $$n$$ 項的陣列，一共有 $$m$$ 次操作及詢問
+>
+> 一、將陣列第 $$i$$ 個位置的元素改成 $$v$$ 
+>
+> 二、詢問陣列在區間 $$[l,r)$$ 之間的總和
+{% endtab %}
+
+{% tab title="參考程式碼" %}
+```cpp
+#include <bits/stdc++.h>
+
+#define ll long long
+#define fastio ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+
+using namespace std;
+
+const int MAXN = 1e5+5;
+ll bit[MAXN];
+
+void update(int i, ll val){
+	while(i < MAXN){
+		bit[i] += val;
+		i += i&(-i);
+	}
+}
+
+ll query(int i){
+	ll res = 0;
+	while(i){
+		res += bit[i];
+		i -= i&(-i);
+	}
+	return res;
+}
+
+signed main(){
+	fastio
+	int n, m;
+	cin >> n >> m;
+	ll arr[n+1];
+	for(int i = 1; i <= n; i++) cin >> arr[i];
+	for(int i = 1; i <= n; i++) update(i,arr[i]);
+	for(int i = 0; i < m; i++){
+		int op;
+		cin >> op;
+		if(op == 1){
+			ll i,v;
+			cin >> i >> v;
+			i++;
+			update(i,-arr[i]);
+			arr[i] = v;
+			update(i,arr[i]);
+		}else if(op == 2){
+			int l, r;
+			cin >> l >> r;
+			l++;
+			cout << query(r) - query(l-1) << "\n";
+		}
+	}
+}
+```
+{% endtab %}
+{% endtabs %}
+
+**逆序對**
+
+{% tabs %}
+{% tab title=" CF Edu Segment Tree Part 1 Step 3" %}
+[點我前往題目](https://codeforces.com/edu/course/2/lesson/4/3/practice/contest/274545/problem/A)
+
+給一個陣列，問在每個點前面有幾個比他大的數字
+{% endtab %}
+
+{% tab title="參考程式碼" %}
+```cpp
+#include <bits/stdc++.h>
+
+#define ll long long
+#define fastio ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+
+using namespace std;
+
+const int N = 1e5+5;
+int bit[N];
+
+void update(int pos, int val){
+	while(pos<N){
+		bit[pos] += val;
+		pos += pos&-pos;
+	}
+}
+
+int query(int pos){
+	int res = 0;
+	while(pos){
+		res += bit[pos];
+		pos -= pos&-pos;
+	}
+	return res;
+}
+
+signed main(){
+	fastio
+	int n;
+	cin >> n;
+	while(n--){
+		int x;
+		cin >> x;
+		cout << query(N-1) - query(x) << " ";
+		update(x,1);
+	}
+}
+```
+{% endtab %}
+{% endtabs %}
 
