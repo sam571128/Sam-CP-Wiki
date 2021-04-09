@@ -342,3 +342,63 @@ signed main(){
 {% endtab %}
 {% endtabs %}
 
+**LIS\(DP\)**
+
+{% tabs %}
+{% tab title="Atcoder Educational DP contest \(Q\) Flowers " %}
+[點我前往題目](https://atcoder.jp/contests/dp/tasks/dp_q)
+
+> 有$$n$$朵花，每一朵花都有各自的高度 $$h_i$$ 與漂亮程度 $$a_i$$
+>
+> 今天你希望由左到右選取一些高度遞增的花
+>
+> 問最大的漂亮程度總和為？
+{% endtab %}
+
+{% tab title="參考程式碼" %}
+```cpp
+#include <bits/stdc++.h>
+
+#define llint long long
+#define fastio ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+
+using namespace std;
+
+
+const int N = 2e5+5;
+
+ll h[N], a[N], bit[N];
+
+void update(int i, int v){
+	while(i < N){
+		bit[i] = max(bit[i],v);
+		i += i&-i;
+	}
+}
+
+int query(int i){
+	int ans = 0;
+	while(i){
+		ans = max(ans,bit[i]);
+		i -= i&-i;
+	}
+	return ans;
+}
+
+signed main(){
+	fastio
+	int n;
+	cin >> n;
+	for(int i = 0;i < n;i++) cin >> h[i];
+	for(int i = 0;i < n;i++) cin >> a[i];
+	for(int i = 0;i < n;i++){
+		update(h[i],query(h[i])+a[i]);
+	}
+	cout << query(n) << "\n";
+}
+```
+{% endtab %}
+{% endtabs %}
+
+
+
