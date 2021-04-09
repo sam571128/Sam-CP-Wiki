@@ -79,10 +79,10 @@ int query(int i){
 仔細想想 BIT 的儲存形式，這裡用陣列大小為 $$8$$ 做範例：
 
 $$
-BIT[1] = Sum(1,1), BIT[2] = Sum(1,2) \\
-BIT[3] = Sum(3,3), BIT[4] = Sum(1,4) \\
-BIT[5] = Sum(5,5), BIT[6] = Sum(5,6) \\
-BIT[7] = Sum(7,7), BIT[8] = Sum(1,8)
+BIT[1] = Sum(1,1), \ BIT[2] = Sum(1,2) \\
+BIT[3] = Sum(3,3), \ BIT[4] = Sum(1,4) \\
+BIT[5] = Sum(5,5), \ BIT[6] = Sum(5,6) \\
+BIT[7] = Sum(7,7), \ BIT[8] = Sum(1,8)
 $$
 
 當我們要更新 $$arr[2]$$ 時，會更新到誰呢？
