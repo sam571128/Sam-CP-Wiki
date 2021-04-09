@@ -44,5 +44,27 @@ $$-x$$ 的位元運算，做的事情是將 NOT x + 1，也就是將 $$x$$ 的�
 
 ![BIT &#x7684;&#x9577;&#x76F8;](../.gitbook/assets/fenwick_tree_binary_index_tree.jpg)
 
+這棵樹長的就像上圖，我們用一個陣列來表示所有節點，而可以每個節點儲存的是一段區間的總和，至於是哪一段區間呢？（以下用 $$BIT[i]$$ 表示為樹上的節點， $$Sum(l,r)$$ 表示為 $$[l,r]$$ 的和）
+
+{% hint style="info" %}
+**BIT**節點儲存的資料為： $$BIT[i] = Sum(i-lowbit(i)+1,i)$$ 
+{% endhint %}
+
+ 而在詢問時，若要詢問到 $$i$$ 的前綴和，該怎麼做呢？
+
+```cpp
+int bit[MAXN]; //存BIT節點的陣列
+int sum(int i){
+    int res = 0;
+    while(i){ //當i不等於零時，去找答案
+        res += bit[i]; //更新答案
+        i -= i&(-i); //減掉lowbit，繼續找答案
+    }
+    return res;
+}
+```
+
+這樣就完成前綴詢問了！
+
 \*\*\*\*
 
