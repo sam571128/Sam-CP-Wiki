@@ -201,16 +201,15 @@ signed main(){
 ```cpp
 #include <bits/stdc++.h>
 
-#define ll long long
 #define fastio ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
 
 using namespace std;
 
 const int MAXN = 1e5+5;
-ll tr[MAXN*4], arr[MAXN], tag[MAXN*4]; 
+int tr[MAXN*4], arr[MAXN], tag[MAXN*4]; 
 
-ll combine(ll a, ll b){
-    return a+b;
+int combine(int a, int b){
+    return max(a,b);
 }
 
 void build(int idx, int l, int r){
@@ -227,14 +226,14 @@ void build(int idx, int l, int r){
 void push(int idx){
     if(tag[idx]){
         tr[idx<<1] = max(tr[idx<<1], tag[idx]);
-        tr[idx<<1|1] = max(tr[idx<<1], tag[idx]);
+        tr[idx<<1|1] = max(tr[idx<<1|1], tag[idx]);
         tag[idx<<1] = max(tag[idx<<1], tag[idx]);
-        tag[idx<<1|1] = max(tag[idx<<1], tag[idx]);
+        tag[idx<<1|1] = max(tag[idx<<1|1], tag[idx]);
         tag[idx] = 0;
     }
 }
 
-void modify(int ql, int qr, ll val, int idx, int l, int r){
+void modify(int ql, int qr, int val, int idx, int l, int r){
     if(l!=r) push(idx); //當節點並非葉節點時，下推標記
     if(ql <= l && r <= qr){
         tr[idx] = max(tr[idx],val);
@@ -247,7 +246,86 @@ void modify(int ql, int qr, ll val, int idx, int l, int r){
     tr[idx] = combine(tr[idx<<1],tr[idx<<1|1]);
 }
 
-ll query(int ql, int qr, int idx, int l, int r){
+int query(int ql, int qr, int idx, int l, int r){
+    if(l!=r) push(idx); //當節點並非葉節點時，下推標記
+    if(ql <= l && r <= qr){
+        return tr[idx];
+    }
+    int m = (l+r)/2;
+    if(ql > m){
+        return query(ql, qr, idx*2+1, m+1, r);
+    }
+    if(qr <= m){
+        return query(ql, qr, idx*2, l, m);
+    }
+    return combine(query(ql, qr, idx*2, l, m), query(ql, qr, idx*2+1, m+1, r));
+}
+
+signed main(){
+    fastio
+    int n, m;
+    cin >> n >> m;
+    for(int i = 0;i < m;i++){
+        int op;
+        cin >> op;
+        if(op==1){
+            int l, r, v;
+            cin >> l >> r >> v;
+            modify(l, r-1, v, 1, 0, n-1);
+        }else{
+            int i;
+            cin >> i;
+            cout << query(i, i, 1, 0, n-1) << "\n";
+        }
+    }
+}#include <bits/stdc++.h>
+
+#define fastio ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+
+using namespace std;
+
+const int MAXN = 1e5+5;
+int tr[MAXN*4], arr[MAXN], tag[MAXN*4]; 
+
+int combine(int a, int b){
+    return max(a,b);
+}
+
+void build(int idx, int l, int r){
+    if(l==r){
+        tr[idx] = arr[l]; 
+    }else{
+        int m = (l+r)/2;
+        build(idx*2,l,m); 
+        build(idx*2+1,m+1,r); 
+        tr[idx] = combine(tr[idx*2],tr[idx*2+1]); 
+    }
+}
+
+void push(int idx){
+    if(tag[idx]){
+        tr[idx<<1] = max(tr[idx<<1], tag[idx]);
+        tr[idx<<1|1] = max(tr[idx<<1|1], tag[idx]);
+        tag[idx<<1] = max(tag[idx<<1], tag[idx]);
+        tag[idx<<1|1] = max(tag[idx<<1|1], tag[idx]);
+        tag[idx] = 0;
+    }
+}
+
+void modify(int ql, int qr, int val, int idx, int l, int r){
+    if(l!=r) push(idx); //當節點並非葉節點時，下推標記
+    if(ql <= l && r <= qr){
+        tr[idx] = max(tr[idx],val);
+        tag[idx] = max(tag[idx],val);
+        return;
+    }
+    int m = (l+r)/2;
+    if(qr > m) modify(ql, qr, val, idx*2+1, m+1, r);
+    if(ql <= m) modify(ql, qr, val, idx*2, l, m);
+    tr[idx] = combine(tr[idx<<1],tr[idx<<1|1]);
+}
+
+int query(int ql, int qr, int idx, int l, int r){
     if(l!=r) push(idx); //當節點並非葉節點時，下推標記
     if(ql <= l && r <= qr){
         return tr[idx];
@@ -284,8 +362,88 @@ signed main(){
 {% endtab %}
 
 {% tab title="參考程式碼（三）" %}
-```
+```cpp
+#include <bits/stdc++.h>
 
+#define fastio ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+
+using namespace std;
+
+const int MAXN = 1e5+5;
+int tr[MAXN*4], arr[MAXN], tag[MAXN*4]; 
+
+int combine(int a, int b){
+    return a+b;
+}
+
+void build(int idx, int l, int r){
+    if(l==r){
+        tr[idx] = arr[l]; 
+    }else{
+        int m = (l+r)/2;
+        build(idx*2,l,m); 
+        build(idx*2+1,m+1,r); 
+        tr[idx] = combine(tr[idx*2],tr[idx*2+1]); 
+    }
+}
+
+void push(int idx){
+    if(tag[idx] != -1){
+        tr[idx<<1] = tag[idx];
+        tr[idx<<1|1] = tag[idx];
+        tag[idx<<1] = tag[idx];
+        tag[idx<<1|1] = tag[idx];
+        tag[idx] = -1;
+    }
+}
+
+void modify(int ql, int qr, int val, int idx, int l, int r){
+    if(l!=r) push(idx); //當節點並非葉節點時，下推標記
+    if(ql <= l && r <= qr){
+        tr[idx] = val;
+        tag[idx] = val;
+        return;
+    }
+    int m = (l+r)/2;
+    if(qr > m) modify(ql, qr, val, idx*2+1, m+1, r);
+    if(ql <= m) modify(ql, qr, val, idx*2, l, m);
+    tr[idx] = combine(tr[idx<<1],tr[idx<<1|1]);
+}
+
+int query(int ql, int qr, int idx, int l, int r){
+    if(l!=r) push(idx); //當節點並非葉節點時，下推標記
+    if(ql <= l && r <= qr){
+        return tr[idx];
+    }
+    int m = (l+r)/2;
+    if(ql > m){
+        return query(ql, qr, idx*2+1, m+1, r);
+    }
+    if(qr <= m){
+        return query(ql, qr, idx*2, l, m);
+    }
+    return combine(query(ql, qr, idx*2, l, m), query(ql, qr, idx*2+1, m+1, r));
+}
+
+signed main(){
+    fastio
+    int n, m;
+    cin >> n >> m;
+    fill(tag,tag+MAXN*4,-1);
+    for(int i = 0;i < m;i++){
+        int op;
+        cin >> op;
+        if(op==1){
+            int l, r, v;
+            cin >> l >> r >> v;
+            modify(l, r-1, v, 1, 0, n-1);
+        }else{
+            int i;
+            cin >> i;
+            cout << query(i, i, 1, 0, n-1) << "\n";
+        }
+    }
+}
 ```
 {% endtab %}
 {% endtabs %}
