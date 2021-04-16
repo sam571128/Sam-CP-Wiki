@@ -18,5 +18,6 @@
 
 ## 圖論
 
-* [DFS & BFS](tu-lun/dfs_bfs.md)
+* [DFS & BFS](tu-lun/dfs_bfs/README.md)
+  * [線段樹優化建圖](tu-lun/dfs_bfs/xian-duan-shu-you-hua-jian-tu.md)
 
