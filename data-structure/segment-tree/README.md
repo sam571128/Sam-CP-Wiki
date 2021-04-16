@@ -14,5 +14,9 @@ description: 儲存區間的一棵樹，可以做到非常多事情！
 
 ### 比較進階的應用
 
-{% page-ref page="xian-duan-shu-you-hua-jian-tu.md" %}
+{% page-ref page="segment-tree-graph.md" %}
+
+{% page-ref page="segment-tree-beats.md" %}
+
+
 
