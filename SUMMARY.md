@@ -13,7 +13,7 @@
 * [BIT \(Binary Indexed Tree\)](data-structure/binary-indexed-tree.md)
 * [線段樹（一）](data-structure/segment-tree-1.md)
 * [線段樹（二）](data-structure/segment-tree-2.md)
-* [線段樹（三）](data-structure/xian-duan-shu-san.md)
+* [線段樹（三）](data-structure/segment-tree-3.md)
 * [Treap](data-structure/treap.md)
 
 ## 圖論
