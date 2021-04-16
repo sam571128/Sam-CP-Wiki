@@ -12,6 +12,8 @@ description: 儲存區間的一棵樹，可以做到非常多事情！
 
 {% page-ref page="segment-tree-3.md" %}
 
+{% page-ref page="segment-tree-4.md" %}
+
 ### 比較進階的應用
 
 {% page-ref page="segment-tree-graph.md" %}
