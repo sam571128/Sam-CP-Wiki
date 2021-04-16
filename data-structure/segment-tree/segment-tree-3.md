@@ -106,5 +106,15 @@ void modify(int ql, int qr, int val, int idx, int l, int r){
 }
 ```
 
+### 練習題
 
+{% tabs %}
+{% tab title="CF Edu Segment tree part 2 step 1" %}
+
+{% endtab %}
+
+{% tab title="參考程式碼" %}
+
+{% endtab %}
+{% endtabs %}
 
