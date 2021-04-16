@@ -11,13 +11,14 @@
 ## 資料結構 <a id="data-structure"></a>
 
 * [BIT \(Binary Indexed Tree\)](data-structure/binary-indexed-tree.md)
-* [線段樹（一）](data-structure/segment-tree-1.md)
-* [線段樹（二）](data-structure/segment-tree-2.md)
-* [線段樹（三）](data-structure/segment-tree-3.md)
+* [線段樹](data-structure/xian-duan-shu/README.md)
+  * [線段樹（一）](data-structure/xian-duan-shu/segment-tree-1.md)
+  * [線段樹（二）](data-structure/xian-duan-shu/segment-tree-2.md)
+  * [線段樹（三）](data-structure/xian-duan-shu/segment-tree-3.md)
 * [Treap](data-structure/treap.md)
 
 ## 圖論
 
-* [DFS & BFS](tu-lun/dfs_bfs/README.md)
-  * [線段樹優化建圖](tu-lun/dfs_bfs/xian-duan-shu-you-hua-jian-tu.md)
+* [DFS & BFS](tu-lun/dfs_bfs.md)
+* [線段樹優化建圖](tu-lun/xian-duan-shu-you-hua-jian-tu.md)
 
