@@ -8,7 +8,7 @@ description: 遇到修改連續區間時，紀錄下來之後再做不就好了�
 
 {% page-ref page="segment-tree-1.md" %}
 
-### 區間修改 單點詢問
+### 區間加值 單點詢問
 
 我們已經學過單點修改的線段樹可以在 $$O(\log n)$$的時間內完成，那麼如果我們今天只是要在修改後，詢問某一個位置的值，那麼我們其實可以使用一種技巧，也就是「差分」！
 
@@ -110,11 +110,183 @@ void modify(int ql, int qr, int val, int idx, int l, int r){
 
 {% tabs %}
 {% tab title="CF Edu Segment tree part 2 step 1" %}
+[點我前往題目](https://codeforces.ml/edu/course/2/lesson/5/1/practice)
 
+第一題：區間加值 單點求值
+
+第二題：區間最大值 單點求值
+
+第三題：區間賦值 單點求
 {% endtab %}
 
-{% tab title="參考程式碼" %}
+{% tab title="參考程式碼（一）" %}
+```cpp
+#include <bits/stdc++.h>
 
+#define ll long long
+#define fastio ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+
+using namespace std;
+
+const int MAXN = 1e5+5;
+ll tr[MAXN*4], arr[MAXN]; 
+
+ll combine(ll a, ll b){
+    return a+b;
+}
+
+void build(int idx, int l, int r){
+    if(l==r){
+        tr[idx] = arr[l]; 
+    }else{
+        int m = (l+r)/2;
+        build(idx*2,l,m); 
+        build(idx*2+1,m+1,r); 
+        tr[idx] = combine(tr[idx*2],tr[idx*2+1]); 
+    }
+}
+
+void update(int pos, int val, int idx, int l, int r){
+    if(l==r){
+        tr[idx] += val;
+        return;
+    }
+    int m = (l+r)/2;
+    if(pos <= m) update(pos, val, idx*2, l, m);
+    else update(pos, val, idx*2+1, m+1, r);
+    tr[idx] = combine(tr[idx*2],tr[idx*2+1]); 
+}
+
+ll query(int ql, int qr, int idx, int l, int r){
+    if(ql <= l && r <= qr){
+        return tr[idx];
+    }
+    int m = (l+r)/2;
+    if(ql > m){
+        return query(ql, qr, idx*2+1, m+1, r);
+    }
+    if(qr <= m){
+        return query(ql, qr, idx*2, l, m);
+    }
+    return combine(query(ql, qr, idx*2, l, m), query(ql, qr, idx*2+1, m+1, r));
+}
+
+signed main(){
+    fastio
+    int n, m;
+    cin >> n >> m;
+    for(int i = 0;i < m;i++){
+        int op;
+        cin >> op;
+        if(op==1){
+            int l, r, v;
+            cin >> l >> r >> v;
+            update(l, v, 1, 0, n-1);
+            if(r != n) update(r, -v, 1, 0, n-1);
+        }else{
+            int i;
+            cin >> i;
+            cout << query(0, i, 1, 0, n-1) << "\n";
+        }
+        for(int j = 0;j < n;j++){
+            cout << query(0, j, 1, 0, n-1) << " ";
+        }
+        cout << "\n";
+    }
+}
+```
+{% endtab %}
+
+{% tab title="參考程式碼（二）" %}
+```cpp
+#include <bits/stdc++.h>
+
+#define ll long long
+#define fastio ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+
+using namespace std;
+
+const int MAXN = 1e5+5;
+ll tr[MAXN*4], arr[MAXN], tag[MAXN*4]; 
+
+ll combine(ll a, ll b){
+    return a+b;
+}
+
+void build(int idx, int l, int r){
+    if(l==r){
+        tr[idx] = arr[l]; 
+    }else{
+        int m = (l+r)/2;
+        build(idx*2,l,m); 
+        build(idx*2+1,m+1,r); 
+        tr[idx] = combine(tr[idx*2],tr[idx*2+1]); 
+    }
+}
+
+void push(int idx){
+    if(tag[idx]){
+        tr[idx<<1] = max(tr[idx<<1], tag[idx]);
+        tr[idx<<1|1] = max(tr[idx<<1], tag[idx]);
+        tag[idx<<1] = max(tag[idx<<1], tag[idx]);
+        tag[idx<<1|1] = max(tag[idx<<1], tag[idx]);
+        tag[idx] = 0;
+    }
+}
+
+void modify(int ql, int qr, ll val, int idx, int l, int r){
+    if(l!=r) push(idx); //當節點並非葉節點時，下推標記
+    if(ql <= l && r <= qr){
+        tr[idx] = max(tr[idx],val);
+        tag[idx] = max(tag[idx],val);
+        return;
+    }
+    int m = (l+r)/2;
+    if(qr > m) modify(ql, qr, val, idx*2+1, m+1, r);
+    if(ql <= m) modify(ql, qr, val, idx*2, l, m);
+    tr[idx] = combine(tr[idx<<1],tr[idx<<1|1]);
+}
+
+ll query(int ql, int qr, int idx, int l, int r){
+    if(l!=r) push(idx); //當節點並非葉節點時，下推標記
+    if(ql <= l && r <= qr){
+        return tr[idx];
+    }
+    int m = (l+r)/2;
+    if(ql > m){
+        return query(ql, qr, idx*2+1, m+1, r);
+    }
+    if(qr <= m){
+        return query(ql, qr, idx*2, l, m);
+    }
+    return combine(query(ql, qr, idx*2, l, m), query(ql, qr, idx*2+1, m+1, r));
+}
+
+signed main(){
+    fastio
+    int n, m;
+    cin >> n >> m;
+    for(int i = 0;i < m;i++){
+        int op;
+        cin >> op;
+        if(op==1){
+            int l, r, v;
+            cin >> l >> r >> v;
+            modify(l, r-1, v, 1, 0, n-1);
+        }else{
+            int i;
+            cin >> i;
+            cout << query(i, i, 1, 0, n-1) << "\n";
+        }
+    }
+}
+```
+{% endtab %}
+
+{% tab title="參考程式碼（三）" %}
+```
+
+```
 {% endtab %}
 {% endtabs %}
 
