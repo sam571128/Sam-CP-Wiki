@@ -11,10 +11,10 @@
 ## 資料結構 <a id="data-structure"></a>
 
 * [BIT \(Binary Indexed Tree\)](data-structure/binary-indexed-tree.md)
-* [線段樹](data-structure/xian-duan-shu/README.md)
-  * [線段樹（一）](data-structure/xian-duan-shu/segment-tree-1.md)
-  * [線段樹（二）](data-structure/xian-duan-shu/segment-tree-2.md)
-  * [線段樹（三）](data-structure/xian-duan-shu/segment-tree-3.md)
+* [線段樹](data-structure/segment-tree/README.md)
+  * [單點修改 區間詢問](data-structure/segment-tree/segment-tree-1.md)
+  * [線段樹上二分搜與經典題](data-structure/segment-tree/segment-tree-2.md)
+  * [區間修改與懶惰標記](data-structure/segment-tree/segment-tree-3.md)
 * [Treap](data-structure/treap.md)
 
 ## 圖論
