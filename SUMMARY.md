@@ -23,4 +23,5 @@
 ## 圖論
 
 * [DFS & BFS](tu-lun/dfs_bfs.md)
+* [強連通分量 SCC](tu-lun/jiang-lian-tong-fen-liang-scc.md)
 
