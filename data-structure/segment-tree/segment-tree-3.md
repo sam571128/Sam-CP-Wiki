@@ -92,8 +92,18 @@ int query(int ql, int qr, int idx, int l, int r){
     return combine(query(ql, qr, idx*2, l, m), query(ql, qr, idx*2+1, m+1, r));
 }
 
-//這裡最特別的地方，區間修改
-
+//這裡最特別的地方，區間修改，寫法與區間詢問大致相同
+void modify(int ql, int qr, int val, int idx, int l, int r){
+    if(l!=r) push(idx); //當節點並非葉節點時，下推標記
+    if(ql <= l && r <= qr){
+        tr[idx] += val;
+        return;
+    }
+    int m = (l+r)/2;
+    if(qr > m) modify(ql, qr, val, idx*2+1, m+1, r);
+    if(ql <= m) modify(ql, qr, val, idx*2, l, m);
+    tr[idx] = combine(tr[idx<<1],tr[idx<<1|1]);
+}
 ```
 
 
