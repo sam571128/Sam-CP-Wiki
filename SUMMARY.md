@@ -16,6 +16,7 @@
   * [線段樹上二分搜與經典題](data-structure/segment-tree/segment-tree-2.md)
   * [區間修改與懶惰標記](data-structure/segment-tree/segment-tree-3.md)
   * [線段樹優化建圖](data-structure/segment-tree/xian-duan-shu-you-hua-jian-tu.md)
+  * [Segment Tree Beats](data-structure/segment-tree/segment-tree-beats.md)
 * [Treap](data-structure/treap.md)
 
 ## 圖論
