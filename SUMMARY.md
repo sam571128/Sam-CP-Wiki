@@ -15,10 +15,10 @@
   * [單點修改 區間詢問](data-structure/segment-tree/segment-tree-1.md)
   * [線段樹上二分搜與經典題](data-structure/segment-tree/segment-tree-2.md)
   * [區間修改與懶惰標記](data-structure/segment-tree/segment-tree-3.md)
+  * [線段樹優化建圖](data-structure/segment-tree/xian-duan-shu-you-hua-jian-tu.md)
 * [Treap](data-structure/treap.md)
 
 ## 圖論
 
 * [DFS & BFS](tu-lun/dfs_bfs.md)
-* [線段樹優化建圖](tu-lun/xian-duan-shu-you-hua-jian-tu.md)
 
