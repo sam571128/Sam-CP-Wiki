@@ -63,6 +63,36 @@ $$
 詳細作法如下：
 
 ```cpp
+const int MAXN = 1e5+5;
+int tr[MAXN*4], arr[MAXN], tag[MAXN*4]; //線段樹的節點數量一般會開成 4n
+
+void push(int idx){
+    //下推節點的標記（這裡以區間加值 區間最大值為例）
+    if(tag[idx]){
+        tr[idx<<1] += tag[idx];
+        tr[idx<<1|1] += tag[idx];
+        tag[idx<<1] += tag[idx];
+        tag[idx<<1|1] += tag[idx];
+        tag[idx] = 0;
+    }
+}
+
+int query(int ql, int qr, int idx, int l, int r){
+    if(l!=r) push(idx); //當節點並非葉節點時，下推標記
+    if(ql <= l && r <= qr){
+        return tr[idx];
+    }
+    int m = (l+r)/2;
+    if(ql > m){
+        return query(ql, qr, idx*2+1, m+1, r);
+    }
+    if(qr <= m){
+        return query(ql, qr, idx*2, l, m);
+    }
+    return combine(query(ql, qr, idx*2, l, m), query(ql, qr, idx*2+1, m+1, r));
+}
+
+//這裡最特別的地方，區間修改
 
 ```
 
