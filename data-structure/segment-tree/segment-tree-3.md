@@ -112,7 +112,7 @@ void modify(int ql, int qr, int val, int idx, int l, int r){
 
 {% tabs %}
 {% tab title="CF Edu Segment tree part 2 step 1" %}
-[點我前往題目](https://codeforces.ml/edu/course/2/lesson/5/1/practice)
+[點我前往題目](https://codeforces.com/edu/course/2/lesson/5/1/practice)
 
 第一題：區間加值 單點求值
 
