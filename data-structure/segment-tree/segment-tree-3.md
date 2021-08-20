@@ -118,7 +118,7 @@ void modify(int ql, int qr, int val, int idx, int l, int r){
 
 第二題：區間最大值 單點求值
 
-第三題：區間賦值 單點求
+第三題：區間賦值 單點求值
 {% endtab %}
 
 {% tab title="參考程式碼（一）" %}
