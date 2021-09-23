@@ -170,7 +170,7 @@ void update(int i, int val){
 int dp[n];
 for(int i = 0; i < n; i++){
     //找前面比自己小的數字最長的子序列長度+1
-    dp[i] = max(query(arr[i])+1, ans);
+    dp[i] = max(query(arr[i])+1, dp[i]);
     update(arr[i], dp[i]); //更新答案
 }
 ```
