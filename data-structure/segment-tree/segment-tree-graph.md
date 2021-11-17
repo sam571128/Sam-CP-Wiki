@@ -4,7 +4,7 @@ description: 區間建邊？那就用線段樹啊！
 
 # 線段樹優化建圖
 
-考慮[這個問題](https://codeforces.com/problemset/problem/786/B)（Codeforces 786B\)
+考慮[這個問題](https://codeforces.com/problemset/problem/786/B)（Codeforces 786B)
 
 > 給定一張 $$n$$ 個點的有向圖，接下來有以 $$q$$ 次加邊的操作
 >
@@ -16,7 +16,7 @@ description: 區間建邊？那就用線段樹啊！
 >
 > 輸出從原點 $$s$$ 到所有點的最短路徑長
 >
-> * $$1 \le n, \ q  \le 10^5$$
+> * $$1 \le n, \ q  \le 10^5$$&#x20;
 
 這個問題，看起來非常困難，除了第一種操作以外，另外兩個操作除了對於每個點都建立一個邊以外，有其他方法嗎？
 
@@ -24,19 +24,17 @@ description: 區間建邊？那就用線段樹啊！
 
 我們可以開一棵線段樹，並將線段樹上的節點當成圖上的節點，如下圖
 
-![&#x8003;&#x616E;&#x9019;&#x68F5;&#x7DDA;&#x6BB5;&#x6A39;&#xFF08;&#x8449;&#x7BC0;&#x9EDE;&#x70BA;&#x5716;&#x4E0A;&#x539F;&#x672C;&#x7684;&#x7BC0;&#x9EDE;&#xFF09;](../../.gitbook/assets/segment-tree-vertexes.jpg)
+![考慮這棵線段樹（葉節點為圖上原本的節點）](<../../.gitbook/assets/Segment Tree Vertexes.jpg>)
 
 在第一種操作時，我們就正常的去連邊
 
-![&#x5F9E; 1 &#x9023;&#x5230; 4&#xFF0C;8 &#x9023;&#x5230; 6](../../.gitbook/assets/segment-tree-graph-1-.jpg)
+![從 1 連到 4，8 連到 6](<../../.gitbook/assets/Segment Tree Graph (1).jpg>)
 
 第二種操作與第三種操作的話就比較特別了，我們連到代表所有區間的點
 
-![&#x5F9E; 1 &#x9023;&#x908A;&#x5230; \[3,5\]](../../.gitbook/assets/segment-tree-graph-2-.jpg)
+![從 1 連邊到 \[3,5\]](<../../.gitbook/assets/Segment Tree Graph (2).jpg>)
 
 之後，將所有節點與其葉節點之間都分別建立一條雙向的邊！
 
 我們就完成了線段樹的建圖了！
-
-
 

@@ -6,7 +6,9 @@ description: 遇到修改連續區間時，紀錄下來之後再做不就好了�
 
 在看這章節前，若尚未學過單點修改的線段樹，請點選以下連結
 
-{% page-ref page="segment-tree-1.md" %}
+{% content-ref url="segment-tree-1.md" %}
+[segment-tree-1.md](segment-tree-1.md)
+{% endcontent-ref %}
 
 ### 區間加值 單點詢問
 
@@ -30,13 +32,13 @@ $$
 
 當我們在詢問 $$A[i]$$ 時，只要詢問陣列$$B$$ 的前 $$i$$ 項之和，即可得到答案
 
-時間複雜度：區間加值 $$O(\log n)$$ ，單點求值 $$O(\log n)$$ 
+時間複雜度：區間加值 $$O(\log n)$$ ，單點求值 $$O(\log n)$$&#x20;
 
 ### 區間修改 區間詢問
 
 我們可以看一下線段樹的運作方式，如下圖
 
-![&#x5340;&#x9593;&#x7684;&#x8A62;&#x554F; or &#x5340;&#x9593;&#x7684;&#x4FEE;&#x6539;](../../.gitbook/assets/segment-tree-.jpg)
+![區間的詢問 or 區間的修改](<../../.gitbook/assets/Segment Tree .jpg>)
 
 在我們要修改區間 $$[2,5]$$ 時，我們其實只要像區間詢問時，只修改上面塗成紅色的三個區間就好了
 
@@ -50,7 +52,7 @@ $$
 
 ### 懶惰標記
 
-![&#x61F6;&#x60F0;&#x6A19;&#x8A18;&#x4E0B;&#x63A8;&#xFF08;&#x7C89;&#x7D05;&#x8272;&#x70BA;&#x76EE;&#x524D;&#x6240;&#x5728;&#x5340;&#x9593;&#xFF0C;&#x7D05;&#x8272;&#x70BA;&#x8A62;&#x554F;&#x5340;&#x9593;&#xFF09;](../../.gitbook/assets/segment-tree-1-2-.jpg)
+![懶惰標記下推（粉紅色為目前所在區間，紅色為詢問區間）](<../../.gitbook/assets/Segment Tree (1) (2).jpg>)
 
 要使用這種方式進行區間修改，則對於線段樹中的值必須具有「可預測性」
 
@@ -388,4 +390,3 @@ signed main(){
 ```
 {% endtab %}
 {% endtabs %}
-
