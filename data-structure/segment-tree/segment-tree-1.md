@@ -4,7 +4,7 @@ description: 單點修改，區間詢問，一切都難不倒這棵樹！
 
 # 單點修改 區間詢問
 
-![線段樹畫成圖的樣子(?](<../../.gitbook/assets/Segment Tree (1).jpg>)
+![線段樹畫成圖的樣子(?](../../.gitbook/assets/segment\_tree.png)
 
 ### 什麼是線段樹？
 
