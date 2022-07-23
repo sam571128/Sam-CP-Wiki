@@ -20,11 +20,11 @@ description: 如果你認為他只能做到單點修改，區間詢問，那麼�
 
 我們可以試著用一棵區間詢問最大值的線段樹來幫我們做到這一點
 
-![一個維護區間最大值的線段樹](<../../.gitbook/assets/Segment Tree BS (1).jpg>)
+![一個維護區間最大值的線段樹](../../.gitbook/assets/bs\_on\_segment\_tree.png)
 
 當我們建立完一棵區間最大值線段樹之後，我們可以在樹上去尋找我們要的位置，如下圖
 
-![線段樹上二分搜（圖為搜尋4的情況）](<../../.gitbook/assets/Segment Tree (2) (1).jpg>)
+![線段樹上二分搜（圖為搜尋4的情況）](../../.gitbook/assets/bs\_on\_segment\_tree\_2.png)
 
 這樣的動作一般稱為「線段樹上二分搜」，如同圖上，我們先從最上面那個點開始找
 
