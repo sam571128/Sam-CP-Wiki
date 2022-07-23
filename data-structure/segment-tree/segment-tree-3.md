@@ -101,6 +101,7 @@ void modify(int ql, int qr, int val, int idx, int l, int r){
     if(l!=r) push(idx); //當節點並非葉節點時，下推標記
     if(ql <= l && r <= qr){
         tr[idx] += val;
+        tag[idx] += val;
         return;
     }
     int m = (l+r)/2;
