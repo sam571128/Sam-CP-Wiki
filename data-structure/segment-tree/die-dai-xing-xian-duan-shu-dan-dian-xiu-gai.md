@@ -133,7 +133,7 @@ int query(int l, int r){
         if(l&1) resl = combine(resl, tr[l++]);
         if(r&1) resr = combine(tr[--r], resr);
     }
-    return res;
+    return combine(resl, resr);
 }
 ```
 
