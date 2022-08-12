@@ -68,7 +68,7 @@ void init(int n){
 int query(int l, int r){
     int res = 0;
     for(l+=n-1, r+=n-1;l <= r;l>>=1,r>>=1){
-        if(l&1) res = combine(t[l++], res);
+        if(l&1) res = combine(res, t[l++]);
         if(r&1^1) res = combine(res, t[r--]);
     }
     return res;
@@ -87,7 +87,7 @@ int query(int l, int r){
 int query(int l, int r){
     int res = 0;
     for(l+=n-1, r+=n-1;l < r;l>>=1,r>>=1){
-        if(l&1) res = combine(t[l++], res);
+        if(l&1) res = combine(res, t[l++]);
         if(r&1) res = combine(res, t[--r]);
     }
     return res;
@@ -115,6 +115,27 @@ void update(int pos, int val){
 ```
 
 時間複雜度：$$O(\log n)$$
+
+### 沒有交換律的合併函數？
+
+在使用線段樹時，如最大連續和等應用。
+
+我們時常會遇到不存在交換律的合併函數。
+
+此時，如果直接使用上面這種寫法，會導致計算錯誤。
+
+有個方法可以處理這件事情，也就是分開處理左界經過的節點和右界經過的節點
+
+```cpp
+int query(int l, int r){
+    int resl = 0, resr = 0;
+    for(l+=n-1, r+=n-1;l < r;l>>=1,r>>=1){
+        if(l&1) resl = combine(resl, tr[l++]);
+        if(r&1) resr = combine(tr[--r], resr);
+    }
+    return res;
+}
+```
 
 ### 如果 $$n$$ 不是 $$2$$ 的冪次怎麼辦？
 
