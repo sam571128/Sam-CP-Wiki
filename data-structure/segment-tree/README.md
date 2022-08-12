@@ -1,8 +1,5 @@
 ---
 description: 儲存區間的一棵樹，可以做到非常多事情！
-cover: >-
-  https://images.unsplash.com/photo-1528183429752-a97d0bf99b5a?crop=entropy&cs=tinysrgb&fm=jpg&ixid=MnwxOTcwMjR8MHwxfHNlYXJjaHwzfHx0cmVlfGVufDB8fHx8MTY1ODU1NzAwMw&ixlib=rb-1.2.1&q=80
-coverY: 0
 ---
 
 # 線段樹
