@@ -19,6 +19,7 @@
   * [線段樹優化建圖](data-structure/segment-tree/segment-tree-graph.md)
   * [Segment Tree Beats](data-structure/segment-tree/segment-tree-beats.md)
   * [迭代型線段樹 單點修改](data-structure/segment-tree/die-dai-xing-xian-duan-shu-dan-dian-xiu-gai.md)
+  * [迭代型線段樹 區間修改](data-structure/segment-tree/die-dai-xing-xian-duan-shu-qu-jian-xiu-gai.md)
 * [Treap](data-structure/treap.md)
 
 ## 圖論
